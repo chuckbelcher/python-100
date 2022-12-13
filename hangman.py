@@ -11,7 +11,7 @@ print(chosen_word)
 word_display = []
 
 for space in range(0, len(chosen_word)):
-    word_display.append('-')
+    word_display.append('_')
 print(word_display)
 
 # TODO-2 - Ask the user to guess a letter and assign their answer to a variable called guess. Make guess lowercase.
@@ -28,4 +28,7 @@ for index in range(0, len(chosen_word)):
 # e.g. If the user guessed "p" and the chosen word was "apple", then display should be ["_", "p", "p", "_", "_"].
 print(word_display)
 
-# Hint - Don't worry about getting the user to guess the next letter. We'll tackle that in step 3.
+#TODO-1: - Use a while loop to let the user guess again.
+# The loop should only stop once the user has guessed all the
+# letters in the chosen_word and 'display' has no more blanks ("_").
+# Then you can tell the user they've won.
