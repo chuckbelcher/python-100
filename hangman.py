@@ -1,4 +1,67 @@
 import random
+
+stages = ['''
+  +---+
+  |   |
+  O   |
+ /|\  |
+ / \  |
+      |
+=========
+''', '''
+  +---+
+  |   |
+  O   |
+ /|\  |
+ /    |
+      |
+=========
+''', '''
+  +---+
+  |   |
+  O   |
+ /|\  |
+      |
+      |
+=========
+''', '''
+  +---+
+  |   |
+  O   |
+ /|   |
+      |
+      |
+=========''', '''
+  +---+
+  |   |
+  O   |
+  |   |
+      |
+      |
+=========
+''', '''
+  +---+
+  |   |
+  O   |
+      |
+      |
+      |
+=========
+''', '''
+  +---+
+  |   |
+      |
+      |
+      |
+      |
+=========
+''']
+
+#TODO Create a variable called lives with an initial value of 6
+#TODO Check to see if the guess is in the chosen word if not reduce the lives variable by 1
+#TODO When lives is equal to 0 game over you loose
+#TODO Print the ascii art
+
 # Step 1 Create Word List
 word_list = ["aardvark", "baboon", "camel"]
 
@@ -34,4 +97,3 @@ while word_display.count('_') > 0:
     print(word_display)
 
 print('Congratulations, You Win !!!!')
-
