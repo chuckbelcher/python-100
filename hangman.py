@@ -76,6 +76,9 @@ print(word_display)
 while word_display.count('_') > 0 and lives > 0:
     # Ask the user to guess a letter and assign their answer to a variable called guess. Make guess lowercase.
     guess = input('What letter do you guess? ').lower()
+    if guess in guessed_letters:
+        print(f'You alread guessed {guess}')
+        continue
     guessed_letters.append(guess)
     if guess not in chosen_word:
         lives -= 1
