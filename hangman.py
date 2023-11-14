@@ -1,4 +1,5 @@
 import random
+import os
 
 stages = ['''
   +---+
@@ -67,6 +68,7 @@ print(chosen_word)
 
 # Create list with to represent chosen word
 word_display = []
+guessed_letters = []
 for space in range(0, word_length):
     word_display.append('_')
 print(word_display)
@@ -74,6 +76,7 @@ print(word_display)
 while word_display.count('_') > 0 and lives > 0:
     # Ask the user to guess a letter and assign their answer to a variable called guess. Make guess lowercase.
     guess = input('What letter do you guess? ').lower()
+    guessed_letters.append(guess)
     if guess not in chosen_word:
         lives -= 1
     else:
@@ -81,10 +84,11 @@ while word_display.count('_') > 0 and lives > 0:
         for index in range(0, word_length):
             if guess == chosen_word[index]:
                 word_display[index] = guess
-    
+    os.system('clear')
     print(stages[lives])
     print(word_display)
-    print(f"you have {lives} lives left")
+    print(f"\nYou have guessed the following letters: \n {guessed_letters}\n")
+    print(f"you have {lives} lives left\n")
 
 if lives == 0:
     print("You Loose")
