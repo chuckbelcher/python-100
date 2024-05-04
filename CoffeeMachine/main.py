@@ -8,6 +8,7 @@ till = 0
 running = True
 
 def reset_inventory():
+    global water, milk, coffee, till
     water = cm_data.resources["water"]
     milk = cm_data.resources["milk"]
     coffee = cm_data.resources["coffee"]
@@ -24,6 +25,36 @@ def print_inventory():
 
 def make_coffee(type):
     print(f"Making {type} ...")
+    if check_inventory(type):
+        print("Inventory check passed")
+    else:
+        print("Inventory check failed")
+        print_inventory()
+
+
+def check_inventory(type):
+    if type == "espresso":
+        if (water >= cm_data.MENU["espresso"]["ingredients"]["water"]
+                and coffee >= cm_data.MENU["espresso"]["ingredients"]["coffee"]):
+            return True
+        else:
+            return False
+    elif type == "latte":
+        if (water >= cm_data.MENU["latte"]["ingredients"]["water"]
+                and milk >= cm_data.MENU["latte"]["ingredients"]["milk"]
+                and coffee >= cm_data.MENU["latte"]["ingredients"]["coffee"]):
+            return True
+        else:
+            return False
+    elif type == "cappuccino":
+        if (water >= cm_data.MENU["cappuccino"]["ingredients"]["water"]
+                and milk >= cm_data.MENU["cappuccino"]["ingredients"]["milk"]
+                and coffee >= cm_data.MENU["cappuccino"]["ingredients"]["coffee"]):
+            return True
+        else:
+            return False
+    else:
+        return False
 
 reset_inventory()
 
@@ -45,7 +76,6 @@ while running:
     else:
         print("Invalid selection")
 
-# TODO: Check to see if there is enough inventory to fulfill request
 # TODO: Process Coins
 # TODO: Check to see if the transaction was successful
 # TODO: make the coffee
