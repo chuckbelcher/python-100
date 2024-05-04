@@ -49,7 +49,7 @@ def take_payment(type):
 
 
 def make_coffee(type):
-    global water, milk, coffee
+    global water, milk, coffee, till
     print(f"Making {type} ...")
     if check_inventory(type):
         print(f"Now brewing your {type} ...")
@@ -63,6 +63,7 @@ def make_coffee(type):
     else:
         print("Unable to make coffee, insufficient inventory.")
         print(f"refunding ${cm_data.MENU[type]['cost']:0.2f}")
+        till -= cm_data.MENU[type]["cost"]
 
 
 def check_inventory(type):
