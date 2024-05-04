@@ -1,19 +1,19 @@
 from data import cm_data
 
 # Starting Values
-water = 0
-milk = 0
-coffee = 0
+water = cm_data.resources["water"]
+milk = cm_data.resources["milk"]
+coffee = cm_data.resources["coffee"]
 till = 0
 running = True
 
 
 def reset_inventory():
-    global water, milk, coffee, till
+    global water, milk, coffee
     water = cm_data.resources["water"]
     milk = cm_data.resources["milk"]
     coffee = cm_data.resources["coffee"]
-    till = 0
+
 
 
 def print_inventory():
@@ -91,8 +91,6 @@ def check_inventory(type):
             return False
     else:
         return False
-
-reset_inventory()
 
 while running:
     action = input("What would you like to do? (espresso/latte/cappuccino): ")
