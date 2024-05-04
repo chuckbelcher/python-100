@@ -60,10 +60,12 @@ def make_coffee(type):
             water -= cm_data.MENU[type]["ingredients"]["water"]
             milk -= cm_data.MENU[type]["ingredients"]["milk"]
             coffee -= cm_data.MENU[type]["ingredients"]["coffee"]
+        return True
     else:
         print("Unable to make coffee, insufficient inventory.")
         print(f"refunding ${cm_data.MENU[type]['cost']:0.2f}")
         till -= cm_data.MENU[type]["cost"]
+        return False
 
 
 def check_inventory(type):
@@ -98,13 +100,16 @@ while running:
         print_inventory()
     elif action == "espresso":
         if take_payment("espresso"):
-            make_coffee("espresso")
+            if make_coffee("espresso"):
+                print("Enjoy your espresso!")
     elif action == "latte":
         if take_payment("latte"):
-            make_coffee("latte")
+            if make_coffee("latte"):
+                print("Enjoy your latte!")
     elif action == "cappuccino":
         if take_payment("cappuccino"):
-            make_coffee("cappuccino")
+            if make_coffee("cappuccino"):
+                print("Enjoy your cappuccino!")
     elif action == "off":
         print("Shutting down ...")
         running = False
@@ -113,7 +118,6 @@ while running:
     else:
         print("Invalid selection")
 
-# TODO: Check to see if the transaction was successful
 
 
 
