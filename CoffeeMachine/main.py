@@ -37,7 +37,7 @@ def process_coins():
 def take_payment(type):
     global till
     payment = process_coins()
-    print(f"You inserted ${payment}")
+    print(f"You inserted ${payment:.2f}")
     if payment >= cm_data.MENU[type]["cost"]:
         change = payment - cm_data.MENU[type]["cost"]
         print(f"Here is your change ${change:.2f}")
@@ -49,12 +49,20 @@ def take_payment(type):
 
 
 def make_coffee(type):
+    global water, milk, coffee
     print(f"Making {type} ...")
     if check_inventory(type):
         print(f"Now brewing your {type} ...")
+        if type == "espresso":
+            water -= cm_data.MENU[type]["ingredients"]["water"]
+            coffee -= cm_data.MENU[type]["ingredients"]["coffee"]
+        else:
+            water -= cm_data.MENU[type]["ingredients"]["water"]
+            milk -= cm_data.MENU[type]["ingredients"]["milk"]
+            coffee -= cm_data.MENU[type]["ingredients"]["coffee"]
     else:
-        print("Inventory check failed")
-        print_inventory()
+        print("Unable to make coffee, insufficient inventory.")
+        print(f"refunding ${cm_data.MENU[type]['cost']:0.2f}")
 
 
 def check_inventory(type):
@@ -105,7 +113,7 @@ while running:
         print("Invalid selection")
 
 # TODO: Check to see if the transaction was successful
-# TODO: Update inventory
+
 
 
 
