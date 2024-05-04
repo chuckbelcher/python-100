@@ -7,6 +7,7 @@ coffee = 0
 till = 0
 running = True
 
+
 def reset_inventory():
     global water, milk, coffee, till
     water = cm_data.resources["water"]
@@ -20,13 +21,37 @@ def print_inventory():
     print(f"Water: {water}ml")
     print(f"Milk: {milk}ml")
     print(f"Coffee: {coffee}g")
-    print(f"Money: ${till}")
+    print(f"Till: ${till}")
+
+
+def process_coins():
+    print("Please insert coins ...")
+    quarters = int(input("How many quarters? "))
+    dimes = int(input("How many dimes? "))
+    nickels = int(input("How many nickels? "))
+    pennies = int(input("How many pennies? "))
+    total = quarters * 0.25 + dimes * 0.10 + nickels * 0.05 + pennies * 0.01
+    return total
+
+
+def take_payment(type):
+    global till
+    payment = process_coins()
+    print(f"You inserted ${payment}")
+    if payment >= cm_data.MENU[type]["cost"]:
+        change = payment - cm_data.MENU[type]["cost"]
+        print(f"Here is your change ${change}")
+        till += cm_data.MENU[type]["cost"]
+        return True
+    else:
+        print("Insufficient funds")
+        return False
 
 
 def make_coffee(type):
     print(f"Making {type} ...")
     if check_inventory(type):
-        print("Inventory check passed")
+        print(f"Now brewing your {type} ...")
     else:
         print("Inventory check failed")
         print_inventory()
@@ -63,11 +88,14 @@ while running:
     if action == "report":
         print_inventory()
     elif action == "espresso":
-        make_coffee("espresso")
+        if take_payment("espresso"):
+            make_coffee("espresso")
     elif action == "latte":
-        make_coffee("latte")
+        if take_payment("latte"):
+            make_coffee("latte")
     elif action == "cappuccino":
-        make_coffee("cappuccino")
+        if take_payment("cappuccino"):
+            make_coffee("cappuccino")
     elif action == "off":
         print("Shutting down ...")
         running = False
@@ -76,9 +104,7 @@ while running:
     else:
         print("Invalid selection")
 
-# TODO: Process Coins
 # TODO: Check to see if the transaction was successful
-# TODO: make the coffee
 # TODO: Update inventory
 
 
