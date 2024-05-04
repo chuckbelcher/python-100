@@ -26,10 +26,10 @@ def print_inventory():
 
 def process_coins():
     print("Please insert coins ...")
-    quarters = int(input("How many quarters? "))
-    dimes = int(input("How many dimes? "))
-    nickels = int(input("How many nickels? "))
-    pennies = int(input("How many pennies? "))
+    quarters = int(input("How many quarters? ") or '0')
+    dimes = int(input("How many dimes? ") or '0')
+    nickels = int(input("How many nickels? ") or '0')
+    pennies = int(input("How many pennies? ") or '0')
     total = quarters * 0.25 + dimes * 0.10 + nickels * 0.05 + pennies * 0.01
     return total
 
@@ -40,7 +40,7 @@ def take_payment(type):
     print(f"You inserted ${payment}")
     if payment >= cm_data.MENU[type]["cost"]:
         change = payment - cm_data.MENU[type]["cost"]
-        print(f"Here is your change ${change}")
+        print(f"Here is your change ${change:.2f}")
         till += cm_data.MENU[type]["cost"]
         return True
     else:
