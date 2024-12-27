@@ -3,7 +3,16 @@ import tkinter as tk
 # ---------------------------- PASSWORD GENERATOR ------------------------------- #
 
 # ---------------------------- SAVE PASSWORD ------------------------------- #
+# Save password to text file
+def save():
+    website = description_entry.get()
+    username = username_entry.get()
+    password = password_entry.get()
 
+    with open("data.txt", "a") as file:
+        file.write(f"{website} | {username} | {password}\n")
+        description_entry.delete(0, tk.END)
+        password_entry.delete(0, tk.END)
 # ---------------------------- UI SETUP ------------------------------- #
 window = tk.Tk()
 window.title("Password Manager")
@@ -25,6 +34,7 @@ password_label.grid(column=0, row=3)
 #Entries
 description_entry = tk.Entry(width=35)
 description_entry.grid(column=1, row=1, columnspan=2)
+description_entry.focus()
 username_entry = tk.Entry(width=35)
 username_entry.grid(column=1, row=2, columnspan=2)
 password_entry = tk.Entry(width=18)
@@ -34,6 +44,6 @@ password_entry.grid(column=1, row=3)
 generate_password_button = tk.Button(text="Generate Password")
 generate_password_button.grid(column=2, row=3, columnspan=2)
 add_button = tk.Button(text="Add", width=36)
-add_button.grid(column=1, row=4, columnspan=2)
+add_button.grid(column=1, row=4, columnspan=2 )
 
 window.mainloop()
