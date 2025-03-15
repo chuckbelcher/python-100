@@ -1,4 +1,5 @@
 import tkinter as tk
+from random import randint
 
 BACKGROUND_COLOR = "#B1DDC6"
 
@@ -14,13 +15,14 @@ with open("data/french_words.csv") as file:
 
 # Create flash card
 def next_card():
-    global current_card, flip_timer
+    global current_card, current_card_no, flip_timer
     window.after_cancel(flip_timer)
-    current_card = data.pop(1)
+    current_card_no = randint(1, len(data) - 1)
+    current_card = data[current_card_no]
     canvas.itemconfig(card_image, image=card_front_img)
     canvas.itemconfig(label_text, text="Question", fill="black")
     canvas.itemconfig(card_text, text=current_card["Question"], fill="black")
-    flip_timer = window.after(5000, flip_card)
+    flip_timer = window.after(4000, flip_card)
 
 def flip_card():
     canvas.itemconfig(card_image, image=card_back_img)
@@ -28,7 +30,10 @@ def flip_card():
     canvas.itemconfig(card_text, text=current_card["Answer"], fill="white")
 
 def is_known():
+    global current_card_no
     next_card()
+    data.pop(current_card_no)
+
 
 def is_unknown():
     next_card()
@@ -62,6 +67,7 @@ check_button.grid(row=1, column=1)
 
 # Create flash card
 current_card = {}
+current_card_no = 0
 flip_timer = window.after(3000, flip_card)
 next_card()
 
