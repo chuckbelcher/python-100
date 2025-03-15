@@ -27,6 +27,12 @@ def flip_card():
     canvas.itemconfig(label_text, text="Answer", fill="white")
     canvas.itemconfig(card_text, text=current_card["Answer"], fill="white")
 
+def is_known():
+    next_card()
+
+def is_unknown():
+    next_card()
+
 # Create flash card window
 window = tk.Tk()
 window.title("Flash Card App")
@@ -47,11 +53,11 @@ card_text = canvas.create_text(400, 263, text="Title", font=("Ariel", 40, "itali
 
 # Create buttons
 cross_img = tk.PhotoImage(file="images/wrong.png")
-cross_button = tk.Button(image=cross_img, highlightthickness=0)
+cross_button = tk.Button(image=cross_img, highlightthickness=0, command=is_unknown)
 cross_button.grid(row=1, column=0)
 
 check_img = tk.PhotoImage(file="images/right.png")
-check_button = tk.Button(image=check_img, highlightthickness=0)
+check_button = tk.Button(image=check_img, highlightthickness=0, command=is_known)
 check_button.grid(row=1, column=1)
 
 # Create flash card
