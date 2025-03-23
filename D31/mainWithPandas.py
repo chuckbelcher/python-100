@@ -1,10 +1,15 @@
 import tkinter as tk
 from random import randint
+import pandas as pd
 
 BACKGROUND_COLOR = "#B1DDC6"
 
+#Read csv file with pandas
+df = pd.read_csv("data/french_words.csv")
+print(df)
 # Read data from file
 data = []
+
 with open("data/french_words.csv") as file:
     for line in file:
         word, translation = line.strip().split(",")
