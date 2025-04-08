@@ -1,12 +1,12 @@
 import smtplib
 import datetime
+from random import choice
 
-# Mail Server Settings
-MAILUSR = "chuckbelcherdev@gmail.com"
-MAILPWD = "Add Password Here"
-MAILSVR = "smtp.gmail.com"
-MAILPORT = "587"
+def get_quotes():
+    with open("quotes.txt", "r") as file:
+        quotes = file.readlines()
 
+    return [quote.strip() for quote in quotes]
 
 # Create a function to send an email
 def send_email(subject, body, to):
@@ -29,6 +29,25 @@ def send_email(subject, body, to):
     finally:
         server.quit()
 
-mailrecipient = "cfbelcher@me.com"
-mailbody = "This is a test email from python"
-send_email("test from python", mailbody, mailrecipient)
+quotes = get_quotes()
+selected_quote = choice(quotes)
+
+# Mail Server Settings
+MAILUSR = "chuckbelcherdev@gmail.com"
+MAILPWD = "Add Password Here"
+MAILSVR = "smtp.gmail.com"
+MAILPORT = "587"
+mail_recipient = input("Enter the email address to send the quote to: ")
+
+now = datetime.datetime.now()
+weekday = now.weekday()
+
+mail_body = selected_quote
+if weekday == 0:
+    print(f"Sending email to {mail_recipient} with quote: \n{mail_body}")
+else:
+    print(f"Today is not the correct day, no email will be sent.")
+
+
+
+# send_email("test from python", mailbody, mailrecipient)
