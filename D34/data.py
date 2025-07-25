@@ -1,8 +1,14 @@
 import requests
 
-question_api = "https://opentdb.com/api.php?amount=10&category=18&type=boolean"
+question_api = "https://opentdb.com/api.php"
+questions_parameters = {
+    "amount": 10,
+    "category": 18,  # Science: Computers
+    "type": "boolean"
+}
 
-response = requests.get(question_api)
+response = requests.get(question_api, params=questions_parameters)
+response.raise_for_status()  # Raises an error for bad responses (4xx or 5xx)
 question_data = response.json()['results']
 
 
