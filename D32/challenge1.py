@@ -46,9 +46,10 @@ dayofweek = now.weekday()
 guotes = get_quotes()
 mail_body = choice(guotes)
 
-if dayofweek == 1:
+if dayofweek == 4:
     print("lets send a message")
     send_email("test from python", mail_body, mail_recipient)
 else:
     print(f"today is not the correct day, today is {dayofweek} no message will be sent")
 
+# write a function to send an email to olivia@someemail.com

@@ -42,6 +42,8 @@ print("Checking if the ISS is overhead and if it's night time...")
 while True:
     if is_iss_overhead() and is_night():
         print(f"{datetime.now()}  - The ISS is overhead and it's night time! Look up!")
+    else:
+        print(f"{datetime.now()}  - The ISS is not overhead or it's not night time.")
 
     time.sleep(60)  # Sleep for 60 seconds before checking again
 
